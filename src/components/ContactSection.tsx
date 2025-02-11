@@ -4,11 +4,6 @@ import { useState } from "react";
 const ContactSection = () => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitStatus, setSubmitStatus] = useState<'idle' | 'success' | 'error'>('idle');
-  
-  // The actual phone number for the tel link
-  const phoneNumber = "+919940756053";
-  // The displayed masked version
-  const maskedPhone = "+91 99407*****";
 
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -20,11 +15,11 @@ const ContactSection = () => {
       const data = {
         name: formData.get('user_name'),
         email: formData.get('user_email'),
-        phone: formData.get('user_phone') || 'Not provided', // Optional phone number
+        phone: formData.get('user_phone') || 'Not provided',
         message: formData.get('message'),
       };
 
-      const response = await fetch('/api/send', {
+      const response = await fetch('/.netlify/functions/contact-form', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
@@ -35,7 +30,7 @@ const ContactSection = () => {
       if (!response.ok) {
         throw new Error('Failed to send message');
       }
-      
+
       setSubmitStatus('success');
       e.currentTarget.reset();
     } catch (error) {
@@ -78,12 +73,7 @@ const ContactSection = () => {
                 <h3 className="text-lg font-semibold text-gray-800 mb-1">
                   Phone
                 </h3>
-                <a 
-                  href={`tel:${phoneNumber}`}
-                  className="text-gray-600 hover:text-portfolio-blue transition-colors"
-                >
-                  {maskedPhone}
-                </a>
+                <p className="text-gray-600">+91 99407*****</p>
                 <p className="text-sm text-gray-500 mt-1">
                   Available during business hours
                 </p>

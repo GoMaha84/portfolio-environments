@@ -5,9 +5,15 @@
   "type": "module",
   "scripts": {
     "dev": "node --max-old-space-size=4096 ./node_modules/vite/bin/vite.js",
+    "dev:testing": "vite --mode testing",
     "server": "node server.js",
+    "server:dev": "NODE_ENV=development node server.js",
+    "server:test": "NODE_ENV=testing node server.js",
+    "server:prod": "NODE_ENV=production node server.js",
     "build": "vite build",
     "build:dev": "vite build --mode development",
+    "build:test": "vite build --mode testing",
+    "build:prod": "vite build --mode production",
     "lint": "eslint .",
     "preview": "vite preview"
   },
