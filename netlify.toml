@@ -21,4 +21,8 @@
   directory = "netlify/functions"
 
 [[plugins]]
-  package = "@netlify/plugin-emails" 
+  package = "@netlify/plugin-emails"
+
+[dev]
+  targetPort = 3002
+  port = 8888 

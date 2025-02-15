@@ -1,4 +1,5 @@
-import { GraduationCap, BookOpen } from "lucide-react";
+import { GraduationCap, BookOpen, FileText, X } from "lucide-react";
+import { useState } from "react";
 import {
   Card,
   CardContent,
@@ -6,6 +7,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogClose,
+} from "@/components/ui/dialog";
 
 const education = [
   {
@@ -48,6 +56,7 @@ const publications = [
     year: "2023",
     publication: "Confluence of Artificial Intelligence and Robotic Process Automation. Smart Innovation, Systems and Technologies, vol 335. Springer, Singapore",
     doi: "10.1007/978-981-19-8296-5_4",
+    pdfUrl: "/publications/rpa-supply-chain.pdf"
   },
   {
     type: "SCOPUS Paper",
@@ -76,26 +85,28 @@ const publications = [
 ];
 
 const EducationSection = () => {
+  const [selectedPdf, setSelectedPdf] = useState<string | null>(null);
+
   return (
-    <section id="education" className="py-20 bg-white">
+    <section id="education" className="py-20 bg-[var(--color-pine-dark)]">
       <div className="container mx-auto px-6">
         <div className="mb-20">
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-            <GraduationCap className="inline-block mr-2 mb-1" />
+          <h2 className="text-3xl font-bold text-center mb-12 text-[var(--color-text-primary)]">
+            <GraduationCap className="inline-block mr-2 mb-1 text-[var(--color-accent)]" />
             Education
           </h2>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6 max-w-6xl mx-auto">
             {education.map((edu, index) => (
-              <Card key={index} className="hover:shadow-md transition-shadow">
+              <Card key={index} className="bg-[var(--color-pine-medium)] border-[var(--color-border)] hover:border-[var(--color-accent)] transition-all">
                 <CardHeader>
-                  <CardTitle className="text-lg text-portfolio-blue">
+                  <CardTitle className="text-lg text-[var(--color-accent)]">
                     {edu.degree}
                   </CardTitle>
-                  <CardDescription>{edu.institution}</CardDescription>
+                  <CardDescription className="text-[var(--color-text-secondary)]">{edu.institution}</CardDescription>
                 </CardHeader>
                 <CardContent>
-                  <p className="text-sm text-gray-600">{edu.period}</p>
-                  <p className="text-sm font-semibold text-portfolio-gray mt-2">
+                  <p className="text-sm text-[var(--color-text-secondary)]">{edu.period}</p>
+                  <p className="text-sm font-semibold text-[var(--color-text-primary)] mt-2">
                     Grade: {edu.grade}
                   </p>
                 </CardContent>
@@ -105,33 +116,93 @@ const EducationSection = () => {
         </div>
 
         <div>
-          <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-            <BookOpen className="inline-block mr-2 mb-1" />
+          <h2 className="text-3xl font-bold text-center mb-4 text-[var(--color-text-primary)]">
+            <BookOpen className="inline-block mr-2 mb-1 text-[var(--color-accent)]" />
             Publications
           </h2>
-          <div className="space-y-6 max-w-6xl mx-auto">
-            {publications.map((pub, index) => (
-              <Card key={index} className="hover:shadow-md transition-shadow">
-                <CardHeader>
-                  <div className="flex justify-between items-start">
-                    <CardTitle className="text-lg text-portfolio-blue">
-                      {pub.title}
-                    </CardTitle>
-                    <span className="text-sm font-medium bg-portfolio-lightBlue text-portfolio-blue px-3 py-1 rounded-full">
-                      {pub.type}
-                    </span>
+          <p className="text-center mb-12 text-[var(--color-text-secondary)]">
+            You can view my complete list of Publications under my ORCID{" "}
+            <a
+              href="https://orcid.org/0000-0003-2193-1149"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--color-accent)] hover:text-[var(--color-text-primary)] transition-colors underline"
+            >
+              click here
+            </a>
+          </p>
+          <div className="max-w-6xl mx-auto h-[600px] overflow-y-auto custom-scrollbar">
+            <div className="grid gap-4">
+              {publications.map((pub, index) => (
+                <Card 
+                  key={index} 
+                  className="bg-[var(--color-pine-medium)] border-[var(--color-border)] hover:border-[var(--color-accent)] transition-all"
+                >
+                  <div className="flex items-center p-4">
+                    <div className="flex-1">
+                      <div className="flex items-start justify-between gap-4">
+                        <button
+                          onClick={() => pub.pdfUrl && setSelectedPdf(pub.pdfUrl)}
+                          className="text-left group"
+                        >
+                          <h3 className="text-lg font-semibold text-[var(--color-accent)] group-hover:text-[var(--color-text-primary)] transition-colors">
+                            {pub.title}
+                          </h3>
+                        </button>
+                        <span className="text-sm font-medium bg-[var(--color-pine-dark)] text-[var(--color-accent)] px-3 py-1 rounded-full border border-[var(--color-border)] whitespace-nowrap">
+                          {pub.type}
+                        </span>
+                      </div>
+                      <p className="text-sm text-[var(--color-text-secondary)] mt-2">
+                        {pub.authors} ({pub.year})
+                      </p>
+                      <p className="text-sm text-[var(--color-text-secondary)] mt-1">
+                        {pub.publication}
+                      </p>
+                      <div className="flex items-center gap-4 mt-2">
+                        <p className="text-sm text-[var(--color-accent)]">
+                          DOI: {pub.doi}
+                        </p>
+                        {pub.pdfUrl && (
+                          <button
+                            onClick={() => setSelectedPdf(pub.pdfUrl!)}
+                            className="flex items-center gap-1 text-sm text-[var(--color-accent)] hover:text-[var(--color-text-primary)] transition-colors"
+                          >
+                            <FileText className="w-4 h-4" />
+                            View PDF
+                          </button>
+                        )}
+                      </div>
+                    </div>
                   </div>
-                  <CardDescription>{pub.authors} ({pub.year})</CardDescription>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-sm text-gray-600 mb-2">{pub.publication}</p>
-                  <p className="text-sm text-portfolio-blue">DOI: {pub.doi}</p>
-                </CardContent>
-              </Card>
-            ))}
+                </Card>
+              ))}
+            </div>
           </div>
         </div>
       </div>
+
+      <Dialog open={!!selectedPdf} onOpenChange={() => setSelectedPdf(null)}>
+        <DialogContent className="max-w-4xl h-[80vh]">
+          <DialogHeader>
+            <DialogTitle className="flex items-center justify-between">
+              <span>Publication PDF</span>
+              <DialogClose className="text-[var(--color-text-secondary)] hover:text-[var(--color-text-primary)]">
+                <X className="w-5 h-5" />
+              </DialogClose>
+            </DialogTitle>
+          </DialogHeader>
+          <div className="flex-1 h-full">
+            {selectedPdf && (
+              <iframe
+                src={selectedPdf}
+                className="w-full h-full rounded-lg"
+                title="Publication PDF"
+              />
+            )}
+          </div>
+        </DialogContent>
+      </Dialog>
     </section>
   );
 };

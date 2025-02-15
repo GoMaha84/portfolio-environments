@@ -1,4 +1,4 @@
-import { Link, Image } from "lucide-react";
+import { Link, Image, Briefcase } from "lucide-react";
 
 const projects = [
   {
@@ -23,16 +23,19 @@ const projects = [
 
 const PortfolioGrid = () => {
   return (
-    <section id="portfolio" className="py-20 bg-white">
+    <section id="portfolio" className="py-20 bg-[var(--color-pine-dark)]">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
-          Portfolio Projects
-        </h2>
+        <div className="flex items-center justify-center gap-3 mb-12">
+          <Briefcase className="w-6 h-6 text-[var(--color-accent)]" />
+          <h2 className="text-3xl font-bold text-[var(--color-text-primary)]">
+            Portfolio Projects
+          </h2>
+        </div>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
             <div
               key={index}
-              className="bg-white rounded-lg overflow-hidden shadow-md hover:shadow-lg transition-shadow"
+              className="bg-[var(--color-pine-medium)] rounded-lg overflow-hidden shadow-lg border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-all"
             >
               <div className="relative h-48">
                 <img
@@ -42,13 +45,13 @@ const PortfolioGrid = () => {
                 />
               </div>
               <div className="p-6">
-                <h3 className="text-xl font-semibold text-gray-800 mb-2">
+                <h3 className="text-xl font-semibold text-[var(--color-text-primary)] mb-2">
                   {project.title}
                 </h3>
-                <p className="text-gray-600 mb-4">{project.description}</p>
+                <p className="text-[var(--color-text-secondary)] mb-4">{project.description}</p>
                 <a
                   href={project.link}
-                  className="inline-flex items-center text-portfolio-blue hover:text-blue-700"
+                  className="inline-flex items-center text-[var(--color-accent)] hover:text-[var(--color-text-primary)] transition-colors"
                 >
                   <Link className="w-4 h-4 mr-2" />
                   View Project

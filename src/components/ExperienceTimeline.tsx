@@ -76,36 +76,36 @@ const experiences = [
 
 const ExperienceTimeline = () => {
   return (
-    <section id="experience" className="py-20 bg-white">
+    <section id="experience" className="py-20 bg-[var(--color-pine-dark)]">
       <div className="container mx-auto px-6">
-        <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+        <h2 className="text-3xl font-bold text-center mb-12 text-[var(--color-text-primary)]">
           Professional Experience
         </h2>
         <div className="max-w-4xl mx-auto">
           {experiences.map((exp, index) => (
             <div key={index} className="relative pl-8 pb-8">
-              <div className="absolute left-0 top-0 h-full w-0.5 bg-portfolio-blue"></div>
-              <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-portfolio-blue"></div>
-              <div className="bg-portfolio-lightGray rounded-lg shadow-sm">
+              <div className="absolute left-0 top-0 h-full w-0.5 bg-[var(--color-accent)]"></div>
+              <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-[var(--color-accent)]"></div>
+              <div className="bg-[var(--color-pine-medium)] rounded-lg shadow-lg border border-[var(--color-border)]">
                 <Accordion type="single" collapsible>
                   <AccordionItem value={`item-${index}`} className="border-none">
                     <AccordionTrigger className="px-6 py-4 hover:no-underline">
                       <div className="flex-1 text-left">
                         <div className="flex items-center mb-2">
-                          <Briefcase className="w-5 h-5 text-portfolio-blue mr-2" />
-                          <h3 className="text-xl font-semibold text-gray-800">
+                          <Briefcase className="w-5 h-5 text-[var(--color-accent)] mr-2" />
+                          <h3 className="text-xl font-semibold text-[var(--color-text-primary)]">
                             {exp.title}
                           </h3>
                         </div>
-                        <p className="text-portfolio-gray mb-1">{exp.company}</p>
-                        <p className="text-sm text-gray-500">{exp.period}</p>
+                        <p className="text-[var(--color-text-secondary)] mb-1">{exp.company}</p>
+                        <p className="text-sm text-[var(--color-text-secondary)] opacity-75">{exp.period}</p>
                       </div>
                     </AccordionTrigger>
                     <AccordionContent className="px-6 pb-4">
                       <div className="space-y-4">
                         <div>
-                          <h4 className="font-semibold text-gray-800 mb-2">Key Responsibilities</h4>
-                          <ul className="list-disc pl-5 space-y-2 text-gray-600">
+                          <h4 className="font-semibold text-[var(--color-text-primary)] mb-2">Key Responsibilities</h4>
+                          <ul className="list-disc pl-5 space-y-2 text-[var(--color-text-secondary)]">
                             {exp.description.map((item, idx) => (
                               <li key={idx}>{item}</li>
                             ))}
@@ -113,8 +113,8 @@ const ExperienceTimeline = () => {
                         </div>
                         {exp.highlights.length > 0 && (
                           <div>
-                            <h4 className="font-semibold text-gray-800 mb-2">Significant Highlights</h4>
-                            <ul className="list-disc pl-5 space-y-2 text-gray-600">
+                            <h4 className="font-semibold text-[var(--color-text-primary)] mb-2">Significant Highlights</h4>
+                            <ul className="list-disc pl-5 space-y-2 text-[var(--color-text-secondary)]">
                               {exp.highlights.map((highlight, idx) => (
                                 <li key={idx}>{highlight}</li>
                               ))}

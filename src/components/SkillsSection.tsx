@@ -127,10 +127,10 @@ const certifications = [
 
 const SkillsSection = () => {
   return (
-    <section id="skills" className="py-20 bg-portfolio-lightGray">
+    <section id="skills" className="py-20 bg-[var(--color-pine-dark)]">
       <div className="container mx-auto px-6">
         {/* Main Section Title */}
-        <h2 className="text-3xl font-bold text-center mb-12 text-gray-800">
+        <h2 className="text-3xl font-bold text-center mb-12 text-[var(--color-text-primary)]">
           Skills & Expertise
         </h2>
 
@@ -141,11 +141,11 @@ const SkillsSection = () => {
             return (
               <div
                 key={index}
-                className="bg-white p-4 rounded-lg shadow-sm hover:shadow-md transition-shadow"
+                className="bg-[var(--color-pine-medium)] p-4 rounded-lg shadow-lg border border-[var(--color-border)] hover:border-[var(--color-accent)] transition-colors"
               >
                 <div className="flex items-center justify-center mb-3">
-                  <IconComponent className="w-5 h-5 text-portfolio-blue mr-2" />
-                  <h3 className="text-lg font-semibold text-gray-800">
+                  <IconComponent className="w-5 h-5 text-[var(--color-accent)] mr-2" />
+                  <h3 className="text-lg font-semibold text-[var(--color-text-primary)]">
                     {skillSet.category}
                   </h3>
                 </div>
@@ -153,7 +153,7 @@ const SkillsSection = () => {
                   {skillSet.items.map((skill, skillIndex) => (
                     <span
                       key={skillIndex}
-                      className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-portfolio-lightBlue text-portfolio-blue hover:bg-portfolio-blue hover:text-white transition-colors cursor-pointer"
+                      className="inline-flex items-center px-2 py-1 rounded-full text-xs font-medium bg-[var(--color-pine-dark)] text-[var(--color-text-secondary)] border border-[var(--color-border)] hover:border-[var(--color-accent)] hover:text-[var(--color-text-primary)] transition-colors cursor-pointer"
                     >
                       {skill}
                     </span>
@@ -164,37 +164,35 @@ const SkillsSection = () => {
           })}
         </div>
 
-        {/* Certifications Section */}
-        <div className="max-w-6xl mx-auto">
+        {/* Modified Certifications Section */}
+        <div className="max-w-2xl mx-auto">
           <div className="flex items-center justify-center gap-3 mb-6">
-            <ScrollText className="w-6 h-6 text-portfolio-blue" />
-            <h3 className="text-3xl font-bold text-gray-800">Certifications</h3>
+            <ScrollText className="w-6 h-6 text-[var(--color-accent)]" />
+            <h3 className="text-3xl font-bold text-[var(--color-text-primary)]">Certifications</h3>
           </div>
-          <div className="bg-white rounded-lg shadow-sm p-4">
-            <div className="max-h-[400px] overflow-y-auto pr-4 custom-scrollbar">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {certifications.map((cert, index) => (
-                  <div
-                    key={index}
-                    className="p-4 border border-portfolio-lightBlue/20 rounded-lg hover:border-portfolio-blue/40 transition-colors"
-                  >
-                    <div className="flex items-start justify-between">
-                      <div>
-                        <h4 className="font-semibold text-gray-800 mb-1">
-                          {cert.title}
-                        </h4>
-                        <p className="text-sm text-gray-600">
-                          {cert.issuer}
-                          {cert.type && ` • ${cert.type}`}
-                        </p>
-                      </div>
-                      <span className="text-sm font-medium text-portfolio-blue bg-portfolio-lightBlue px-2 py-1 rounded-full">
-                        {cert.year}
-                      </span>
+          <div className="bg-[var(--color-pine-medium)] rounded-lg shadow-lg border border-[var(--color-border)] p-4">
+            <div className="max-h-[400px] overflow-y-auto pr-4 custom-scrollbar space-y-4">
+              {certifications.map((cert, index) => (
+                <div
+                  key={index}
+                  className="p-4 border border-[var(--color-border)] rounded-lg hover:border-[var(--color-accent)] transition-colors bg-[var(--color-pine-dark)]"
+                >
+                  <div className="flex items-start justify-between">
+                    <div className="flex-1">
+                      <h4 className="font-semibold text-[var(--color-text-primary)] mb-1">
+                        {cert.title}
+                      </h4>
+                      <p className="text-sm text-[var(--color-text-secondary)]">
+                        {cert.issuer}
+                        {cert.type && ` • ${cert.type}`}
+                      </p>
                     </div>
+                    <span className="text-sm font-medium text-[var(--color-accent)] bg-[var(--color-pine-medium)] px-2 py-1 rounded-full border border-[var(--color-border)] ml-4 whitespace-nowrap">
+                      {cert.year}
+                    </span>
                   </div>
-                ))}
-              </div>
+                </div>
+              ))}
             </div>
           </div>
         </div>
@@ -205,15 +203,15 @@ const SkillsSection = () => {
           width: 8px;
         }
         .custom-scrollbar::-webkit-scrollbar-track {
-          background: #f1f1f1;
+          background: var(--color-pine-medium);
           border-radius: 4px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb {
-          background: #cbd5e1;
+          background: var(--color-pine-light);
           border-radius: 4px;
         }
         .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-          background: #94a3b8;
+          background: var(--color-accent);
         }
       `}</style>
     </section>

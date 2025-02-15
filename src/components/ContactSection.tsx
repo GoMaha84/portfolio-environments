@@ -1,4 +1,4 @@
-import { Mail, MapPin, Phone } from "lucide-react";
+import { Mail, MapPin, Phone, Send, Github, Linkedin } from "lucide-react";
 import { useState } from "react";
 
 const ContactSection = () => {
@@ -42,92 +42,53 @@ const ContactSection = () => {
   };
 
   return (
-    <section id="contact" className="py-20 bg-white">
+    <section id="contact" className="py-20 bg-[var(--color-pine-dark)]">
       <div className="container mx-auto px-6">
-        <div className="flex items-center justify-center gap-3 mb-12">
-          <Mail className="w-6 h-6 text-portfolio-blue" />
-          <h2 className="text-3xl font-bold text-gray-800">Get In Touch</h2>
-        </div>
-        <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8">
-          <div className="space-y-6">
-            <div className="flex items-start">
-              <Mail className="w-6 h-6 text-portfolio-blue mr-4 mt-1" />
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-1">
-                  Email
-                </h3>
-                <a 
-                  href="mailto:gowrirajagopal.bm@gmail.com"
-                  className="text-gray-600 hover:text-portfolio-blue transition-colors"
-                >
-                  gowrirajagopal.bm@gmail.com
-                </a>
-                <p className="text-sm text-gray-500 mt-1">
-                  Feel free to email me for any professional inquiries
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start">
-              <Phone className="w-6 h-6 text-portfolio-blue mr-4 mt-1" />
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-1">
-                  Phone
-                </h3>
-                <p className="text-gray-600">+91 99407*****</p>
-                <p className="text-sm text-gray-500 mt-1">
-                  Available during business hours
-                </p>
-              </div>
-            </div>
-            <div className="flex items-start">
-              <MapPin className="w-6 h-6 text-portfolio-blue mr-4 mt-1" />
-              <div>
-                <h3 className="text-lg font-semibold text-gray-800 mb-1">
-                  Location
-                </h3>
-                <p className="text-gray-600">India</p>
-                <p className="text-sm text-gray-500 mt-1">
-                  Open to remote and local opportunities
-                </p>
-              </div>
-            </div>
+        <div className="flex flex-col items-center mb-12">
+          <div className="flex items-center justify-center gap-3 mb-4">
+            <Mail className="w-6 h-6 text-[var(--color-accent)]" />
+            <h2 className="text-3xl font-bold text-[var(--color-text-primary)]">Get in Touch</h2>
           </div>
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div>
-              <input
-                type="text"
-                name="user_name"
-                placeholder="Your Name"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-portfolio-blue"
-                required
-                disabled={isSubmitting}
-              />
+          <p className="text-[var(--color-text-secondary)] text-center max-w-2xl">
+            I'm always open to new opportunities and collaborations. Feel free to reach out!
+          </p>
+        </div>
+        <div className="max-w-2xl mx-auto">
+          <form onSubmit={handleSubmit} className="space-y-6">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              <div>
+                <label htmlFor="name" className="block text-[var(--color-text-primary)] mb-2">Name</label>
+                <input
+                  type="text"
+                  id="name"
+                  name="user_name"
+                  className="w-full px-4 py-2 rounded-lg bg-[var(--color-pine-medium)] border border-[var(--color-border)] text-[var(--color-text-primary)] focus:border-[var(--color-accent)] focus:outline-none"
+                  placeholder="Your name"
+                  required
+                  disabled={isSubmitting}
+                />
+              </div>
+              <div>
+                <label htmlFor="email" className="block text-[var(--color-text-primary)] mb-2">Email</label>
+                <input
+                  type="email"
+                  id="email"
+                  name="user_email"
+                  className="w-full px-4 py-2 rounded-lg bg-[var(--color-pine-medium)] border border-[var(--color-border)] text-[var(--color-text-primary)] focus:border-[var(--color-accent)] focus:outline-none"
+                  placeholder="Your email"
+                  required
+                  disabled={isSubmitting}
+                />
+              </div>
             </div>
             <div>
-              <input
-                type="email"
-                name="user_email"
-                placeholder="Your Email"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-portfolio-blue"
-                required
-                disabled={isSubmitting}
-              />
-            </div>
-            <div>
-              <input
-                type="tel"
-                name="user_phone"
-                placeholder="Your Phone Number (Optional)"
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-portfolio-blue"
-                disabled={isSubmitting}
-              />
-            </div>
-            <div>
+              <label htmlFor="message" className="block text-[var(--color-text-primary)] mb-2">Message</label>
               <textarea
+                id="message"
                 name="message"
-                placeholder="Your Message"
-                rows={4}
-                className="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-portfolio-blue"
+                rows={6}
+                className="w-full px-4 py-2 rounded-lg bg-[var(--color-pine-medium)] border border-[var(--color-border)] text-[var(--color-text-primary)] focus:border-[var(--color-accent)] focus:outline-none resize-none"
+                placeholder="Your message"
                 required
                 disabled={isSubmitting}
               ></textarea>
@@ -135,19 +96,38 @@ const ContactSection = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full bg-portfolio-blue text-white py-2 px-6 rounded-lg transition-colors ${
-                isSubmitting ? 'opacity-70 cursor-not-allowed' : 'hover:bg-blue-600'
+              className={`w-full md:w-auto px-8 py-3 bg-[var(--color-accent)] text-white rounded-lg hover:bg-[var(--color-accent-hover)] transition-colors flex items-center justify-center gap-2 ${
+                isSubmitting ? 'opacity-70 cursor-not-allowed' : ''
               }`}
             >
-              {isSubmitting ? 'Sending...' : 'Send Message'}
+              Send Message
+              <Send className="w-4 h-4" />
             </button>
             {submitStatus === 'success' && (
-              <p className="text-green-600 text-sm mt-2">Message sent successfully!</p>
+              <p className="text-green-400 text-sm mt-2">Message sent successfully!</p>
             )}
             {submitStatus === 'error' && (
-              <p className="text-red-600 text-sm mt-2">Failed to send message. Please try again.</p>
+              <p className="text-red-400 text-sm mt-2">Failed to send message. Please try again.</p>
             )}
           </form>
+          <div className="mt-12 flex justify-center space-x-6">
+            <a
+              href="https://github.com/your-username"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
+            >
+              <Github className="w-8 h-8" />
+            </a>
+            <a
+              href="https://www.linkedin.com/in/gowri-rajagopal-6932b035/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="text-[var(--color-text-secondary)] hover:text-[var(--color-accent)] transition-colors"
+            >
+              <Linkedin className="w-8 h-8" />
+            </a>
+          </div>
         </div>
       </div>
     </section>
