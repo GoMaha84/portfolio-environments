@@ -25,7 +25,7 @@ A modern, responsive portfolio website built with React and TypeScript.
 git clone <your-repo-url>
 
 # Navigate to the project directory
-cd resume-journey-portfolio
+cd D:\Mybusiness\MyPortfolio\resume-journey-portfolio-main
 
 # Install dependencies
 npm install
