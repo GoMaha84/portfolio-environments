@@ -1,20 +1,34 @@
-import { User, Mail } from "lucide-react";
+import { User, Mail, Leaf } from "lucide-react";
 import { useEffect, useState } from "react";
 
 const HeroSection = () => {
   const [isVisible, setIsVisible] = useState(false);
-  const [snowflakes, setSnowflakes] = useState<Array<{ id: number; left: string; animationDelay: string }>>([]);
+  const [leaves, setLeaves] = useState<Array<{ id: number; style: React.CSSProperties }>>([]);
+  const [clouds, setClouds] = useState<Array<{ id: number; style: React.CSSProperties }>>([]);
 
   useEffect(() => {
     setIsVisible(true);
-    
-    // Generate random snowflakes
-    const flakes = Array.from({ length: 50 }, (_, index) => ({
-      id: index,
-      left: `${Math.random() * 100}%`,
-      animationDelay: `${Math.random() * 5}s`
+
+    // Generate leaves
+    const newLeaves = Array.from({ length: 30 }, (_, i) => ({
+      id: i,
+      style: {
+        left: `${Math.random() * 100}%`,
+        animationDelay: `${Math.random() * 15}s`,
+      }
     }));
-    setSnowflakes(flakes);
+    setLeaves(newLeaves);
+
+    // Generate clouds
+    const newClouds = Array.from({ length: 5 }, (_, i) => ({
+      id: i,
+      style: {
+        animationDelay: `${Math.random() * 40}s`,
+        opacity: 0.4 + (Math.random() * 0.3), // Varying opacity between 0.4 and 0.7
+        transform: `scale(${0.8 + Math.random() * 0.4}) translateY(${-20 + Math.random() * 40}px)`, // Random size and slight vertical variation
+      }
+    }));
+    setClouds(newClouds);
   }, []);
 
   const scrollToSection = (sectionId: string) => {
@@ -25,67 +39,82 @@ const HeroSection = () => {
   };
 
   return (
-    <div className="relative h-screen overflow-hidden bg-[#1A1F2C]">
-      {/* Mountain Background */}
+    <div className="relative h-screen overflow-hidden">
+      {/* Background Image */}
       <div 
-        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        className="absolute inset-0"
         style={{
-          backgroundImage: "url('https://images.unsplash.com/photo-1519681393784-d120267933ba')",
-          filter: "brightness(0.7)"
+          backgroundImage: "url('/images/hero-autumn.png')",
+          backgroundPosition: 'center',
+          backgroundRepeat: 'no-repeat',
+          backgroundSize: 'cover',
+          width: '100%',
+          height: '100%'
         }}
       />
-      
-      {/* Moving Clouds */}
-      <div className="absolute inset-0 overflow-hidden">
-        <div className="cloud cloud-1"></div>
-        <div className="cloud cloud-2"></div>
-        <div className="cloud cloud-3"></div>
-      </div>
 
-      {/* Animated Snow */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {snowflakes.map(flake => (
+      {/* Clouds Container */}
+      <div className="absolute inset-0 overflow-hidden">
+        {clouds.map(cloud => (
           <div
-            key={flake.id}
-            className="snow"
-            style={{
-              left: flake.left,
-              animationDelay: flake.animationDelay,
-            }}
+            key={cloud.id}
+            className={`cloud cloud-${cloud.id + 1}`}
+            style={cloud.style}
           />
         ))}
       </div>
 
+      {/* Autumn Leaves */}
+      {leaves.map(leaf => (
+        <div
+          key={leaf.id}
+          className="leaf"
+          style={leaf.style}
+        />
+      ))}
+
+      {/* Subtle Overlay */}
+      <div 
+        className="absolute inset-0"
+        style={{
+          background: "linear-gradient(to bottom, rgba(10, 31, 28, 0.2), rgba(10, 31, 28, 0.3))"
+        }}
+      />
+
       {/* Content Container */}
-      <div className="relative container mx-auto px-6 h-full flex items-center">
+      <div className="relative container mx-auto px-6 h-full flex items-center justify-center">
         <div 
-          className="backdrop-blur-md bg-white/10 rounded-2xl p-8 md:p-12 w-full max-w-3xl mx-auto transform transition-all duration-700 ease-out shadow-2xl border border-white/20"
+          className="backdrop-blur-sm bg-[#0A1F1C]/30 rounded-3xl p-12 w-full max-w-2xl transform transition-all duration-700 ease-out border border-white/10"
           style={{
             opacity: isVisible ? 1 : 0,
             transform: isVisible ? 'translateY(0)' : 'translateY(20px)'
           }}
         >
-          <div className="text-center md:text-left space-y-6">
-            <h1 className="text-4xl md:text-6xl font-bold text-white mb-4">
-              Gowri Rajagopal
-            </h1>
-            <h2 className="text-xl md:text-2xl text-gray-200 mb-6">
+          <div className="text-center space-y-6">
+            <div className="flex items-center justify-center gap-3">
+              <Leaf className="w-6 h-6 text-[#E67E22]" />
+              <h1 className="text-5xl font-bold text-white">
+                Gowri Rajagopal
+              </h1>
+            </div>
+            <h2 className="text-2xl text-white">
               AI-Driven Product Innovator | Building the Future of AI & SaaS
             </h2>
-            <p className="text-lg text-gray-300 mb-8">
-              Transforming ideas into innovative solutions at the intersection of artificial intelligence and software development.
+            <p className="text-lg text-white/90 max-w-2xl mx-auto">
+              Transforming ideas into innovative solutions at the intersection of artificial intelligence and software development, 
+              with a passion for nature, art, and music.
             </p>
-            <div className="flex flex-col md:flex-row gap-4 justify-center md:justify-start">
+            <div className="flex gap-4 justify-center mt-8">
               <button
                 onClick={() => scrollToSection('contact')}
-                className="inline-flex items-center px-6 py-3 bg-[#8B5CF6] text-white rounded-lg hover:bg-[#7C3AED] transition-colors"
+                className="inline-flex items-center px-6 py-3 bg-[#E67E22] text-white rounded-lg hover:bg-[#D35400] transition-colors"
               >
                 <Mail className="mr-2 h-5 w-5" />
                 Contact Me
               </button>
               <button
                 onClick={() => scrollToSection('about')}
-                className="inline-flex items-center px-6 py-3 bg-white/10 text-white rounded-lg hover:bg-white/20 transition-colors backdrop-blur-sm"
+                className="inline-flex items-center px-6 py-3 bg-black/20 text-white rounded-lg hover:bg-[#E67E22] transition-colors backdrop-blur-sm"
               >
                 <User className="mr-2 h-5 w-5" />
                 About Me

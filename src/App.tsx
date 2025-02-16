@@ -7,6 +7,7 @@ import Index from "./pages/Index";
 import Articles from "./pages/Articles";
 import NotFound from "./pages/NotFound";
 import NavigationMenu from "./components/NavigationMenu";
+import AllProducts from "./pages/AllProducts";
 
 const queryClient = new QueryClient();
 
@@ -20,6 +21,7 @@ const App = () => (
         <Routes>
           <Route path="/" element={<Index />} />
           <Route path="/articles" element={<Articles />} />
+          <Route path="/portfolio/all" element={<AllProducts />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>
